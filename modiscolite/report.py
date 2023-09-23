@@ -195,7 +195,7 @@ def make_logo(match, logo_dir, motifs):
 	ppm = motifs[match]
 	ic = compute_per_position_ic(ppm, background, 0.001)
 
-	_plot_weights(ppm*ic[:, None], path='{}/{}.png'.format(logo_dir, match))
+	_plot_weights(ppm*ic[:, None], path='{}/{}.svg'.format(logo_dir, match))
 		
 
 def create_modisco_logos(modisco_h5py: os.PathLike, modisco_logo_dir, trim_threshold, pattern_groups: List[str]):
@@ -232,8 +232,8 @@ def create_modisco_logos(modisco_h5py: os.PathLike, modisco_logo_dir, trim_thres
 			trimmed_cwm_fwd = cwm_fwd[start_fwd:end_fwd]
 			trimmed_cwm_rev = cwm_rev[start_rev:end_rev]
 
-			_plot_weights(trimmed_cwm_fwd, path='{}/{}.cwm.fwd.png'.format(modisco_logo_dir, tag))
-			_plot_weights(trimmed_cwm_rev, path='{}/{}.cwm.rev.png'.format(modisco_logo_dir, tag))
+			_plot_weights(trimmed_cwm_fwd, path='{}/{}.cwm.fwd.svg'.format(modisco_logo_dir, tag))
+			_plot_weights(trimmed_cwm_rev, path='{}/{}.cwm.rev.svg'.format(modisco_logo_dir, tag))
 
 	modisco_results.close()
 	return tags
@@ -268,8 +268,8 @@ def report_motifs(modisco_h5py: Path, output_dir: os.PathLike, img_path_suffix: 
 
 				results['pattern'].append(pattern_tag)
 				results['num_seqlets'].append(num_seqlets)
-				results['modisco_cwm_fwd'].append(os.path.join(img_path_suffix, 'trimmed_logos', f'{pattern_tag}.cwm.fwd.png'))
-				results['modisco_cwm_rev'].append(os.path.join(img_path_suffix, 'trimmed_logos', f'{pattern_tag}.cwm.rev.png'))
+				results['modisco_cwm_fwd'].append(os.path.join(img_path_suffix, 'trimmed_logos', f'{pattern_tag}.cwm.fwd.svg'))
+				results['modisco_cwm_rev'].append(os.path.join(img_path_suffix, 'trimmed_logos', f'{pattern_tag}.cwm.rev.svg'))
 
 	patterns_df = pd.DataFrame(results)
 	reordered_columns = ['pattern', 'num_seqlets', 'modisco_cwm_fwd', 'modisco_cwm_rev']
@@ -295,7 +295,7 @@ def report_motifs(modisco_h5py: Path, output_dir: os.PathLike, img_path_suffix: 
 						logos.append("NA")
 					else:
 						make_logo(row[name], output_dir, motifs)
-						logos.append(f'{img_path_suffix}{row[name]}.png')
+						logos.append(f'{img_path_suffix}{row[name]}.svg')
 				else:
 					break
 
