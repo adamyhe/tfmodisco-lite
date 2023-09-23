@@ -1,5 +1,6 @@
 # tfmodisco-lite
 
+> **Note**
 > **Modified so that report produces svg files.**
 
 > **Warning**
